@@ -1,0 +1,25 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+
+# Secrets
+.env
+
+# Runtime
+jobs/
+.pytest_cache/
+.DS_Store
+voice_samples/
+
+# Generated media (kept locally, never pushed)
+generated-images/
+generated-videos/
+scratch-probe/*.log
+scratch-probe/tts-smoke/

@@ -1,0 +1,40 @@
+[project]
+name = "video-gen"
+version = "0.1.0"
+description = "Gradio frontend for EvoLink Seedance 2.0 video generation + Gemini Nano Banana character images"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "gradio>=6.14",
+    "boto3>=1.34",
+    "python-dotenv>=1.0",
+    "sniffio>=1.3.1",
+    # 2.14 is the floor for the Omni Interactions API: 2.6.0 predates the model
+    # and cannot serialize video_config at all (docs/gemini-omni-research.md §3).
+    "google-genai>=2.14",
+    "pydantic>=2.6",
+    "httpx>=0.27",
+    "elevenlabs>=1.0",
+    # Cartesia TTS (sonic-3.5). 3.x is a Stainless-generated client;
+    # AsyncCartesia is the async entrypoint. Fish Audio deliberately uses raw
+    # httpx instead of fish-audio-sdk (its model literal cannot name s2.1-pro).
+    "cartesia>=3.5.1",
+    "syncsdk",
+    "anthropic>=0.109.1",
+    "huggingface-hub>=1.15.0",
+    # heygen_replicate lipsync engine (app/lipsync.py imports it lazily);
+    # was missing from deps, so fresh venvs failed its routing test.
+    "replicate>=1.0",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.0",
+    "pytest-mock>=3.12",
+    "pytest-asyncio>=0.23",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+asyncio_mode = "auto"
